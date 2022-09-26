@@ -1,0 +1,61 @@
+.background {
+  background-image: url("../Images/pokemonBack.gif");
+  background-size: cover;
+  background-position: center;
+  height: 110vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: flex-start;
+  
+}
+
+.logo-landing {
+  display: flex;
+  margin-top: 30px;
+  width: 50%;
+  position: absolute;
+  bottom: -50px;
+  right: -60px;
+}
+
+.button {
+  background-color:  rgb(247, 224, 20);
+  border: 4px solid rgb(3, 96, 216);
+  border-radius: 15px;
+  display: flex;
+  font-family: 'Trebuchet MS';
+  font-size: 100%;
+  text-decoration:solid;
+  font-weight: bold;
+  justify-content: center;
+  padding: 10px;
+  text-align: center;
+  width: 10%;
+  cursor: pointer;
+  position:relative;
+  margin-top:20px;
+  margin-left: 20px;
+  font-style:normal;
+  
+
+}
+
+.button:hover{
+  background-color:rgb(9, 245, 60)
+}
+
+.byHM{
+  color: rgb(247, 212, 12);
+  position: relative;
+  font-family: fantasy;
+  font-weight: 400;
+  padding-top: 10px;
+  margin-left: 20px;
+  display: flex;
+  align-items: flex-start;
+  
+}
