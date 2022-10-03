@@ -1,0 +1,29 @@
+.pag-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+}
+
+.paging-buttons {
+  background-color: rgb(117, 89, 117);
+  width: 35px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+}
+
+.paging-buttons:hover{
+  background-color: rgb(247, 210, 142);
+}
+
+.pag-input {
+  width: 20px;
+  border: 1px solid rgb(29, 25, 25);
+  border-radius: 4px;
+  font-size: 18px;
+}

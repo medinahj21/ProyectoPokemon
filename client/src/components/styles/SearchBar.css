@@ -1,0 +1,17 @@
+.searchBar {
+  width: 20%;
+  max-width: 250px;
+  display: inline-flex;
+}
+
+.searchBar-input{
+  padding: 12px;
+  border: 2px solid black;
+  border-radius: 15px 5px;
+  background-color: rgb(170, 166, 172);
+}
+
+.search-icon {
+  width: 20px;
+  cursor: pointer;
+}

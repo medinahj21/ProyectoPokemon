@@ -1,12 +1,13 @@
 import React, { Fragment } from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   filterByType,
+  filterByOrigin,
   getPokemons,
-  getTypes,
   orderAlphabetical,
   orderByAttack,
+  clearErrors
 } from "../redux/actions/actions"
 import { Link } from "react-router-dom";
 import PokemonCard from "./PokemonCard";
@@ -15,6 +16,7 @@ import PikachuError from "./Images/PikachuError.gif";
 import SearchBar from "./SearchBar";
 import Loading from "./Loading";
 import Paging from "./Paging";
+import "./styles/Home.css";
 
 function Home(){
   const dispatch= useDispatch();
@@ -23,36 +25,39 @@ function Home(){
 
   
   const [page, setPage]= useState(1);
-  const [eachPage, setEachPage]= useState(12);
+  const eachPage= 12;
 
   
   const maxPages= Math.ceil(allPokemons.length / eachPage)
   const [pageInput, setPageInput]= useState(1);
   const [orderBy, setOrderBy]= useState("");
 
-  const [selected, setSelected]= useState(false);
+  
 
   const error= useSelector((state)=> state.error);
 
-  useEffect(()=> {
-    // getPokemons();
-    // getTypes();
-    console.log("All Pokemons---->:", allPokemons)
-  }, [])
-
+  
   const handleAllPokemons= (e)=> {
     e.preventDefault(e);
+    dispatch(clearErrors());
     dispatch(getPokemons()); 
     setPageInput(1);
     setPage(1);
-    setSelected(true);
+    
   }
   
   const handleTypeOptions= (e)=> {
     e.preventDefault();
     dispatch(filterByType(e.target.value));
+    
     setPage(1);
     setPageInput(1);
+  }
+
+  const handleFilterByOrigin= (e)=> {
+    e.preventDefault();
+    dispatch(filterByOrigin(e.target.value))
+    
   }
 
   const handleOrderAlphabet = (e)=> {
@@ -63,9 +68,11 @@ function Home(){
     setOrderBy(`Ordered ${e.target.value}`)
   }
 
+  
+
   const handleOrderAttack = (e)=> {
     e.preventDefault(e);
-    dispatch(orderByAttack());
+    dispatch(orderByAttack(e.target.value));
     setPage(1);
     setPageInput(1);
     setOrderBy(`Ordered ${e.target.value}`)
@@ -73,7 +80,6 @@ function Home(){
 
   return (
     <div className="background-home">
-      <h1>Mi Pagina de Home</h1>
       <img className="logo" src={pokemonStars} alt="img not found"/>
       <div className="menu-container">
         <div id= "menu">
@@ -85,7 +91,7 @@ function Home(){
               </button>
             </li>
             <li>
-              <Link className="Link" to={"/pokemonCreate"}>
+              <Link className="Link" to={"/pokemonCreateNew"}>
                 <button className="home-nav-buttons">CREATE POKEMON</button>
               </Link>
             </li>
@@ -134,7 +140,7 @@ function Home(){
                 defaultValue= "title"
                 onChange={(e)=> handleTypeOptions(e)}
               >
-                <option value= "title"  disabled={true}>
+                <option value= "title" disabled={true}>
                 Filter by: Type
                 </option>
                 <option value= "all">All</option>
@@ -142,11 +148,20 @@ function Home(){
                   allTypes?.map((t) => {
                     return (
                       <option value= {t.name} key= {t.id}>{t.name}</option>
-                    )
-                  })
-                }
+                    );
+                  })}
               </select>
             </li>
+            <li>
+              <select
+              defaultValue= "title"
+              onChange= {(e)=> handleFilterByOrigin(e)}
+              >
+                <option value="title" disabled={true}>Filter by: Origin</option>
+                <option value= "API">API</option>
+                <option value= "CREATED">CREATED</option>
+              </select>
+            </li>            
           </ul>
         </div>
       </div>

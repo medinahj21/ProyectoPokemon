@@ -10,7 +10,9 @@ CREATE_POKEMON,
 CLEAN_DETAIL,
 CLEAN_POKEMONS,
 ALPHABETICAL_ORDER,
-GET_TYPES } from "../actions/actions";
+GET_TYPES,
+CLEAR_ERRORS,
+FILTER_BY_ORIGIN } from "../actions/actions";
 
 //configuro mi estado inicial
 const initialState= {
@@ -19,7 +21,8 @@ const initialState= {
     pokemons: [],
     pokemonDetail: null,
     error: null,
-    pokemonsByType: []
+    pokemonsByType: [],
+    pokemonsByOrigin: []
 }
 
 //exporto un reducer que tenga logica para las actions
@@ -64,6 +67,7 @@ export default function reducer(state= initialState, action) {
       if (action.payload === "all") {
         return {
           ...state,
+          pokemons: fullPokemons,
           pokemonsByType: fullPokemons
           }
       } else {
@@ -72,9 +76,27 @@ export default function reducer(state= initialState, action) {
         })
         return {
           ...state,
+          pokemons: filteredByType,
           pokemonsByType: filteredByType
         }
       }
+
+      case FILTER_BY_ORIGIN:
+        let filtered= state.pokemons;
+        if(action.payload=== "API"){
+          filtered= filtered.filter(p=> p.id[0]==="A")
+          return {
+            ...state,
+            pokemons: filtered,
+            pokemonsByOrigin: filtered
+          }
+        } else {
+          return {
+            ...state,
+            pokemons: filtered.filter(p=> p.id[0] !== "A"),
+            pokemonsByOrigin: filtered.filter(p=> p.id[0] !== "A")
+          }
+        }
 
     case ORDER_BY_ATTACK:
       let myPokemons= state.pokemons;
@@ -92,9 +114,11 @@ export default function reducer(state= initialState, action) {
         }
       }
 
+      
+
     case ALPHABETICAL_ORDER:
       let myPokes= state.pokemons;
-      if (action.payload=== "ascending"){
+      if (action.payload=== "asc"){
         let orderedA= myPokes.sort((a,b)=> {
           if (a.name > b.name) return 1;
           if (b.name > a.name) return -1;
@@ -142,6 +166,12 @@ export default function reducer(state= initialState, action) {
       return {
         ...state,
         pokemons: action.payload
+      }
+
+    case CLEAR_ERRORS:
+      return{
+        ...state,
+        error:null
       }
 
     default:

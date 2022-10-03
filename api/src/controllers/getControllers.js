@@ -1,5 +1,4 @@
 const axios = require("axios");
-var fs = require('fs');
 const { Pokemon, Type }= require("../db.js")
 
 //Esta función me permite traerme la info de todos los pokemon desde la pokeapi
@@ -46,6 +45,7 @@ const pokemonInfoFromApi= async ()=> {
   }
 }
 
+
 //Esta función me permitirá traerme toda la info de los pokemon que tenga en mi Base de Datos
 const pokemonInfoFromDB= async () => {
   try {
@@ -66,42 +66,17 @@ const pokemonInfoFromDB= async () => {
 
 //Acá concateno toda la información de los pokemon, los de la API + los de la BD
 const completeInfo= async ()=> {
-  try {
-    const filePath = __dirname + '/../../pokemonCache.json'
-    const date = new Date();
-    const cachePokemon = JSON.parse(fs.readFileSync(filePath));
-    if(
-      cachePokemon.date &&  
-      parseInt(cachePokemon.date.split('-')[0]) >= parseInt(date.getDate()) &&
-      cachePokemon.data
-    ){
-      const dbPokemonInfo= await pokemonInfoFromDB();
-      const formatData= dbPokemonInfo.map(p=> {
-        return {
-          ...p.dataValues, types: p.dataValues.types.map(e=> e.name)
-        }
-
-      })
-            
-      return [...cachePokemon.data, ...formatData];
-    }else{
-      console.log('obteniendo data ....')
-      const apiPokemonInfo= await pokemonInfoFromApi();
+  const apiPokemonInfo= await pokemonInfoFromApi();
+  try {      
       const dbPokemonInfo= await pokemonInfoFromDB();
       if(dbPokemonInfo){
-        console.log("Guardando en cache data ...")
-        fs.writeFileSync(filePath, 
-          JSON.stringify(
-            { 
-              date: `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`, 
-              data: apiPokemonInfo
-            }
-            )
-          );
-      }
-      return [...apiPokemonInfo, ...dbPokemonInfo];
-    }
-  ;    
+        const formatData= dbPokemonInfo.map(p=> {
+          return {...p.dataValues, types: p.dataValues.types.map(e=> e.name)}
+      })
+      return [...apiPokemonInfo, ...formatData];
+    } else {
+        return apiPokemonInfo;      
+      }          
   } catch (error) {
     console.log("COMPLETE INFO:", error)
     console.log({error: error.message})

@@ -1,21 +1,22 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import LandingPage from "./components/LandingPage";
 import Home from './components/Home';
-import PokemonCreate from './components/PokemonCreate';
-
+import PokeCreation from './components/PokeCreation';
+import PokemonDetail from './components/PokemonDetail';
+import Nav from './components/Nav';
 import './App.css';
+import NewCreation from "./components/NewForm";
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
-        <Switch>
+      <div className="App">        
+        <Nav/>
         <Route exact path= {'/'} component={LandingPage}/>
         <Route path= {'/home'} component={Home}/>
-        <Route exact path= '/pokemonCreate' component={PokemonCreate} />
-      {/* <Route exact path= '/pokemonDetail/:id' component={PokemonDetail} />* */}
-        </Switch>
+        <Route path= {'/pokemonCreateNew'} component={NewCreation} />
+        <Route exact path= '/pokemonDetail/:id' component={PokemonDetail} />        
       </div>
     </BrowserRouter>
   );

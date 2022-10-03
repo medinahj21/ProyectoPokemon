@@ -1,0 +1,167 @@
+.background-create{
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+}
+
+.background-create::after {
+    content: "";
+    background: url("../Images/pokeCreation.jpg") #42b4f7;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: absolute;
+    opacity: 0.2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+  }
+
+h1 {
+  width: 920px;
+  background-color: rgba(247, 169, 25, 0.527);
+  text-align: center;
+  border-radius: 20px 20px 0px 0px;
+  padding: 12px, 0px, 12px, 0px;
+  margin-top: 50px;
+  margin-left: 200px;
+}
+
+.main {
+  background-color: rgba(243, 201, 63, 0.507);
+  width: 920px;
+  height: 550px;
+  margin-top: 0px;
+  margin-left: 200px;
+  border-radius: 0px 0px 20px 20px;
+}
+
+form{
+  padding-top: 5px;
+  text-align: center;
+}
+
+.left-data{
+  padding: 30px;
+  margin-left: 20px;
+  position: fixed;
+}
+
+.right-data{
+  padding: 30px;
+  margin-right: 50px;
+  position: fixed;
+  margin-left: 500px;
+}
+
+label {
+  color: #0d0d0d;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 1px;
+  font-size: 16px;
+  float: left;
+  margin-left: 5%;
+}
+
+.input-create-field{
+  flex-grow: 1;
+  padding: 5px;
+  outline: none;
+  border: 1px solid #1b0b0a;
+  border-radius: 5px;
+  background: #f3d8d5;
+  transition: background 0.25s, box-shadow 0.25s;
+  width: 100%;
+  max-width: 300px;
+  display: inline-flex;
+  font-family: cursive;
+
+}
+
+select {
+  flex-grow: 1;
+  padding: 5px;
+  outline: none;
+  border: 1px solid #1b0b0a;
+  border-radius: 5px;
+  background: #f3d8d5;
+  transition: background 0.25s, box-shadow 0.25s;
+  width: 100%;
+  max-width: 300px;
+  display: inline-flex;
+  font-family: cursive;
+  color: #0d0d0d;
+
+}
+
+.errors{
+  color: #f22613;
+  font-family: cursive;
+  font-size: 14px;
+  text-align: left;
+  position: fixed;
+
+}
+
+.option{
+  color: #f22613;
+  font-family: cursive;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  margin-right: 190px;
+}
+
+.button-create{
+  background-color: #f2bf27;
+  border: 0.5px solid #0d0d0d;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: #0d0d0d;
+  display: flex;
+  font-family: fantasy;
+  font-size: medium;
+  text-decoration: none;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1.75rem;
+  padding: 0.75rem 1.65rem;
+  position: relative;
+  text-align: center;
+  width: auto;
+  cursor: pointer;
+  user-select: none;
+   
+}
+
+.button-create:disabled{
+  background-color: #7a7170;
+}
+
+.div-button-create{
+  margin-left: 20%;
+  margin-top: 50%;
+
+}
+
+.go-home-button{
+  display: flex;
+  align-items: center;
+  margin-left: 550px;
+
+}
+
+.home-button{
+  background-color: #f2bf27;
+  padding:20px;
+  width: 150px;
+  border-radius: 10px;
+  font-family: fantasy;
+  font-weight: bold;
+  font-size: 20px;
+
+}
+
+.home-button:hover{
+  background-color: aqua;
+}

@@ -1,18 +1,22 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getPokemonByName } from "../redux/actions/actions";
+import { getPokemonByName, clearErrors } from "../redux/actions/actions";
 import searchIcon from "./Images/searchIcon.png";
+import "./styles/SearchBar.css";
 
 function SearchBar({ setPageInput, setPage }){
   const dispatch= useDispatch();
   const [name, setName]= useState("");
+
+  
 
   const handleNameInput= (e)=> {
     setName(e.target.value)
   }
 
   const handleClick= ()=> {
+    dispatch(clearErrors());
     if (name !== ""){
       dispatch(getPokemonByName(name))
         setPageInput(1)
@@ -25,6 +29,7 @@ function SearchBar({ setPageInput, setPage }){
 
   const onKeyDown= (e)=> {
     if(e.keyCode === 13){
+      dispatch(clearErrors());
       if(name !== ""){
         dispatch(getPokemonByName(name))
         
@@ -54,7 +59,7 @@ function SearchBar({ setPageInput, setPage }){
           type="submit"
           onClick={(e)=> handleClick(e)}
         >
-          <img src={searchIcon} alt="img not found"/>          
+          <img src={searchIcon} alt="img not found" className="search-icon"/>          
         </button>        
       </div>
     </div>

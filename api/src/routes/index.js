@@ -1,7 +1,7 @@
 const { Router } = require('express');
-const validator = require('express-joi-validation').createValidator({});
+//const validator = require('express-joi-validation').createValidator({});
 const { asyncGetPokemons, asyncGetPokemonsById, asyncGetTypes}= require ('../controllers/getControllers')
-const postPokemonRq = require("./../validators/postPokemonRq")
+//const postPokemonRq = require("./../validators/postPokemonRq")
 const {asyncPostPokemon}= require("../controllers/postControllers");
 const { asyncDltPokemonsById } = require('../controllers/deleteControllers');
 
@@ -20,7 +20,7 @@ router.get("/pokemons", asyncGetPokemons)
 
 router.get("/pokemons/:id", asyncGetPokemonsById)
 
-router.post("/pokemons", validator.body(postPokemonRq), asyncPostPokemon)
+router.post("/pokemons", asyncPostPokemon)
 
 router.get("/types", asyncGetTypes)
 

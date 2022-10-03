@@ -1,0 +1,49 @@
+.card-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding-top: 30px;
+  
+}
+
+.cards {
+  position: relative;
+}
+
+.card-image {
+  position: relative;
+  width: 20%;
+  align-self: center;
+}
+
+.pic{
+  width: 370%;
+}
+
+.card-container{
+    position: relative;
+    top: -90px;
+    padding: 50px;
+    color: #0d0d0d;
+    letter-spacing: 1px;
+    font-size: 25px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    
+  }
+
+.card-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+
+}
+
+.card-info:hover{
+  
+}
+
+

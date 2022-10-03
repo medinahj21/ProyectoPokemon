@@ -1,0 +1,18 @@
+.pikaloading{
+  width: 30%;
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 200px;
+}
+
+.loading-text{
+  text-align: center;
+  font-size: 40px;
+  font-family: fantasy;
+  letter-spacing: 2px;
+}

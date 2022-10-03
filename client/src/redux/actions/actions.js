@@ -12,6 +12,9 @@ export const ERROR_404 = "ERROR_404";
 export const DELETE_POKEMON = "DELETE_POKEMON";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const CLEAN_POKEMONS = "CLEAN_POKEMONS";
+export const CLEAR_ERRORS= "CLEAR_ERRORS";
+export const FILTER_BY_ORIGIN= "FILTER_BY_ORIGIN";
+
 
 export const getPokemons = () => {
     return async (dispatch) => {
@@ -30,35 +33,56 @@ export const getPokemons = () => {
 export const getTypes= () => {
   return async (dispatch) => {
     try{
-      const { data: allTypes } = axios.get("http://localhost:3001/types")
+      const allTypes= await axios.get("http://localhost:3001/types")
       return dispatch({
         type: GET_TYPES,
-        payload: allTypes
+        payload: allTypes.data
       })
-    }catch(e){ console.log(e) }
+    }catch(error){ console.log(error) }
 
   }
 }
 
 export const getPokemonByName = (name) => {
-  return (dispatch) => {
-    let pokemonByName;
-    axios.get(`http://localhost:3001/pokemons?name=${name}`).then(resp => {
-      pokemonByName= resp.data
-    }).catch(error => console.log(error));
-    return dispatch({
-      type: GET_POKEMON_BY_NAME,
-      payload: pokemonByName
-    })
+  return async (dispatch) => {
+    try {
+      let pokemonByName= await axios.get(`http://localhost:3001/pokemons?name=${name}`)
+      return dispatch({
+        type: GET_POKEMON_BY_NAME,
+        payload: pokemonByName.data
+      })  
+    } catch (error) {
+      console.log(error)
+      return dispatch({
+        type: ERROR_404,
+        payload: {error: error.message}
+      })    
+    }    
   }
 }
 
+export const clearErrors = ()=>{
+  return (dispatch)=> {
+
+    dispatch({
+      type: CLEAR_ERRORS,
+      payload: {}
+    })
+  }
+
+
+}
+
 export const createPokemon = (payload)=> {
-  return (dispatch) => {
-    let response;
-    axios.post("/pokemons", payload)
-    .then(resp => response= resp).catch(err => console.log(err))
-    return response
+  return async (dispatch) => {
+    try {
+      let response= await axios.post("http://localhost:3001/pokemons", payload)
+      
+      return response  
+    } catch (error) {
+      console.log(error)  
+      console.log({error: error.message})    
+    }    
   }
 }
 
@@ -69,24 +93,30 @@ export const filterByType= (pokemonType) => {
   }
 }
 
+export const filterByOrigin= (pokemonOrigin)=>{
+  return {
+    type: FILTER_BY_ORIGIN,
+    payload: pokemonOrigin
+  }}
+
 export const getPokemonDetail= (id) => {
-  return (dispatch)=> {
-    let pokemonById;
-    axios.get(`http://localhost:3001/pokemons/${id}`).then(resp => {
-      pokemonById= resp.data;
-    }).catch (error => {
-      console.log(error)
+  return async (dispatch)=> {
+    try {
+      let pokemonById= await axios.get(`http://localhost:3001/pokemons/${id}`)
+      return dispatch({
+        type: GET_POKEMON_DETAIL,
+        payload: pokemonById.data
+      })  
+    } catch (error) {
+      console.log(error);
       return dispatch({
         type: ERROR_404,
         payload: {error: error.message}
-      })
-    })
-    return dispatch({
-      type: GET_POKEMON_DETAIL,
-      payload: pokemonById
-    })
+      })      
+    }    
   }
 }
+
 
 export const orderAlphabetical= (payload)=> {
   return {
@@ -103,17 +133,20 @@ export const orderByAttack= (payload)=> {
 }
 
 export const deletePokemon= (id)=> {
-  return (dispatch)=> {
-    let pokemonToDelete;
-    axios.delete(`http://localhost:3001/pokemons/${id}`).then(resp => {
-      pokemonToDelete= resp.data
-    }).catch (error => console.log(error))
-    return dispatch({
-      type: DELETE_POKEMON,
-      payload: pokemonToDelete
+  return async (dispatch)=> {
+    try {
+      let pokemonToDelete= await axios.delete(`http://localhost:3001/pokemons/${id}`)
+      return dispatch({
+        type: DELETE_POKEMON,
+        payload: pokemonToDelete.data
     })
+    } catch (error) {
+      console.log(error)      
+    }
+    
   }
 }
+
 
 export const cleanDetail= ()=> {
   return {

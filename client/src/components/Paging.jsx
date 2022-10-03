@@ -1,18 +1,30 @@
 import React from "react";
 import previous from "./Images/previous.png"
 import next from "./Images/next.png"
+import "./styles/Paging.css";
 
 
 function Paging({ page, setPage, pageInput, setPageInput, maxPages }){
   const nextPage= ()=> {
+    if(page >= maxPages){
+      setPage(maxPages)
+      setPageInput(maxPages)
+    }else{
     setPage(Number(page) + 1)
     setPageInput(Number(page) + 1)
+    }
+    
   }
 
   const previousPage= ()=> {
+    if (page <= 1){
+      setPage(1)
+    setPageInput(1)
+  }else{
+
     setPage(Number(page) - 1)
     setPageInput(Number(page) - 1)
-  }
+  }}
 
   const onKeyDown= (e)=> {
     if (e.keyCode === 13){
@@ -39,7 +51,7 @@ function Paging({ page, setPage, pageInput, setPageInput, maxPages }){
       <button 
         className="paging-buttons" 
         // disable={pageInput <=1} 
-        onClick={previousPage}
+        onClick={()=> previousPage()}
         >
         <img src={previous} alt="button not found" width="20px" height="25px"/>
       </button>
@@ -54,7 +66,7 @@ function Paging({ page, setPage, pageInput, setPageInput, maxPages }){
       <button 
         className="paging-buttons" 
         // disabled= {page >= maxPages} 
-        onClick={nextPage}
+        onClick={()=> nextPage()}
         >
         <img src={next} alt="button not found" width="20px" height="25px"/>
       </button>

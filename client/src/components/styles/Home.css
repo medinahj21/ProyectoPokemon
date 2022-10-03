@@ -1,0 +1,104 @@
+body {
+  background: -o-linear-gradient(to bottom, rgb(141, 141, 241), rgb(74, 74, 228));
+  background-color: rgb(105, 44, 161);
+  background-size: cover;
+}
+
+.background-home {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  width: 50%;
+}
+
+.menu-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  margin-right: 2%;
+}
+
+.Link {
+  text-decoration: none;
+}
+
+.paging-container {
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#menu ul {
+  list-style: none;
+  margin: 0%;
+  padding: 0%;
+}
+
+#menu ul li {
+  display:inline-block;
+  align-content: space-around;
+  
+}  
+
+.grid-container {
+  padding-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 5px 5px;
+  grid-auto-flow: row;
+  grid-area: auto;
+}
+
+.home-nav-buttons{
+  background-color: rgb(218, 183, 30);
+  border: 5px solid rgba(41, 54, 241, 0.856);
+  border-radius: 15px;
+  padding: 15px;
+  cursor: pointer;
+  display: block;
+  align-content: space-between;
+  gap: 55px;
+  font-weight: bold;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 20px;
+
+
+}
+
+
+.home-nav-buttons:hover{
+  background-color: aquamarine;
+}
+
+#Order-Filter ul li {
+  display: inline-block;
+  padding: 10px;
+  font-size: 20px;
+  
+  }
+
+#Order-Filter ul li select {
+    color: #0d0d0d;
+    display: block;
+    padding: 8px;
+    width: auto;
+    background-color: #f7e869;
+    border:rgb(48, 10, 83);
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+#Order-Filter ul li select:hover {
+    background-color: #f7e869;
+    cursor: pointer;
+  }

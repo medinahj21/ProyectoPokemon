@@ -1,16 +1,17 @@
-const validateURL = (url) => {
+export const validateURL = (url) => {
   return /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg|bmp)$/.test(url);
 };
 
-const validateName = (name) => {
-  return /^[a-zA-Z]{1,15}$/.test(name);
+export const validateName = (name) => {
+
+  return (/^[a-zA-Z]{1,15}$/.test(name));
 };
 
-const validateNumbers = (value) => {
+export const validateNumbers = (value) => {
   return /^[1-9][0-9]?$|^100$/.test(value);
 };
 
-const validateAbilities = (value) => {
+export const validateAbilities = (value) => {
   return /^[a-zA-Z,\s]*$/g.test(value);
 };
 
@@ -39,12 +40,22 @@ export function validate(input, pokemons){
   } else if (!validateNumbers(input.speed)){
     errors.speed= "Invalid input. Enter a valid number from 1 to 100"
   } else if (!validateNumbers(input.height)){
-    errors.height= ""
+    errors.height= "Invalid input. Enter a valid number from 1 to 100"
+  } else if (!validateNumbers(input.weight)){
+    errors.weight= "Invalid input. Enter a valid number from 1 to 100"
   }
-
-
-
-
-
+  return errors;
 
 }
+
+export function validateSelection(input){
+  let errorSelect= {};
+  if (input.length === 0 || input.length >2){
+    errorSelect.poke_types="Please, choose from 1 to 2 pokemon types";
+  } 
+  console.log(errorSelect.poke_types)
+  return errorSelect;
+}
+
+
+
