@@ -103,6 +103,7 @@ const asyncGetPokemons=  async (req, res)=> {
     }
     
   } catch (error) {
+    res.status(400).json({error: error.message})
     console.log("GET TOTAL:",error)
     console.log({error: error.message})    
   }

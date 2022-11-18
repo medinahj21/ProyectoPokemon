@@ -26,8 +26,22 @@ function NewCreation(){
         image: ""
         })
 
-function handleSubmit(){
-
+function handleSubmit(e){
+  e.preventDefault();
+  dispatch(createPokemon(input))
+  alert("New Pokemon was created successfully")
+setInput({
+      name: "",
+      abilities: "",
+      hp: "",
+      attack: "",
+      defense: "",
+      speed: "",
+      height: "",
+      weight: "",
+      poke_types: [],
+      image: ""
+      });
 }
 
 function handleChange(e){
@@ -66,7 +80,7 @@ function handleChange(e){
             setInput({...input, [e.target.name]:e.target.value})
             delete errorObj[e.target.name];
            } else {
-               errorObj.image= "Invalid input"
+               errorObj[e.target.name]= "Invalid input"
            }           
 
     }
@@ -85,7 +99,7 @@ function nameToId(arr){
 function handleDeleteTypes(e){
     let aux= types;
     aux.splice(e.currentTarget.value, 1);
-    console.log("Target....",e.currentTarget.value)
+    console.log("Target....", e.currentTarget.value)
     console.log("AUXXXXX",aux)
     setTypes(aux)
     setInput({...input, poke_types:nameToId(aux)})  
@@ -96,36 +110,29 @@ function handleDeleteTypes(e){
 }
 
 function handleSelection(e){
-    if (types.indexOf(e.target.value === -1)){
+    if (types.indexOf(e.target.value) === -1){
         let aux= [...types, e.target.value];
         setTypes(aux);        
-        setInput({...input, poke_types:nameToId(aux) })
+        setInput({...input, poke_types: nameToId(aux)})
     }
     console.log(input)
     //validateSelection(types)
   } 
 
 function handleDisabled(e){
-    var aux= true;
-    let auxiliar= Object.keys(input);
-    for(let i=0; i<auxiliar.length; i++){
-        if (!aux) break;
-        if ( Array.isArray(auxiliar[i])){
-                auxiliar.length===0 ? aux= false : aux= true
-            } else {
-                auxiliar ? aux=false : aux= true
-            }
-
-    }console.log(aux)
-        
+    if (!input.name || !input.abilities || !input.hp ||
+      !input.attack || !input.defense   || !input.speed ||
+      !input.height || !input.weight    || input.poke_types.length===0){
+        setDisabled(true)
+      } else setDisabled(false)
     }
 
 
 
 
-    return (
-        <div>
-            <div className="background-create">
+  return (
+    <div>
+      <div className="background-create">
       <h1>CREATE A POKEMON BY SETTING CUSTOM FEATURES</h1>
       <div className="main">
         <form onSubmit={(e)=> handleSubmit(e)} onChange= {()=> handleDisabled()}>
@@ -188,18 +195,21 @@ function handleDisabled(e){
                   })}
                 </select>
                 {
-                    types.length > 0 ? <div>
+                    types.length > 0 ?
+                      <div>
                         <ul>
-                           {types.map((t,index)=> {
-                        console.log(t)
-                        return (
-                            <li key={index} value={index} onClick= {(e)=> handleDeleteTypes(e)}>{t} x</li>
+                          {types.map((t,index)=> {
+                          return ( 
+                          <li
+                            key={index}
+                            value={index} onClick= {(e)=> handleDeleteTypes(e)}
+                          >{t} x </li>
                         )
-                        })  } 
+                        })} 
                         </ul>
-                    </div>
+                      </div>
                     
-                    : <p>Selecte from 1 to 2 types</p>
+                    : <p>Select from 1 to 2 types</p>
                 }
              </div>
           </div>
@@ -287,8 +297,9 @@ function handleDisabled(e){
           <div className="div-button-create">            
             <input
               className="button-create"
+              disabled= {disabled}
               type="submit"
-              value={"BOTON"}
+              value={"CREATE"}
                           />
            
 
@@ -303,7 +314,7 @@ function handleDisabled(e){
       </div>
     </div>
 
-        </div>
+  </div>
     )
 
 }  

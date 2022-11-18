@@ -11,7 +11,7 @@ function PokeCreation(){
   const pokeTypes= useSelector(state=> state.types);
   const pokemons= useSelector(state=> state.allPokemons);
 
-  const [errors, setErrors]= useState({other:""});
+  const [errors, setErrors]= useState({});
   const [disabled, setDisabled]= useState(true);
   
   
@@ -35,7 +35,7 @@ function PokeCreation(){
       console.log("INPUT", input)
     /*   const checkPoke;
     Object.keys(input) */
-      if(input.name ==="")setDisabled(true)
+      if(input.name === "") setDisabled(true)
       else setDisabled(false)
     }
     
@@ -104,6 +104,7 @@ function PokeCreation(){
       height: "",
       weight: "",
       poke_types: [],
+      poke_typesName: [],
       image: ""
       });
       history.push("/home");
@@ -271,7 +272,7 @@ function PokeCreation(){
               className="button-create"
               type="submit"
               value={"BOTON"}
-              disabled={disabled}
+              disabled= {false}
             />
            
 
